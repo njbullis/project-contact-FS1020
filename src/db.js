@@ -3,21 +3,6 @@
 let util = require('util');
 let fs = require('fs');
 let path = require('path');
-
-<form action="" method="POST">
-    <input type="text" name="first_name">
-    <input type="text" name="last_name">
-      <input type="email" name="email address">
-        <input type = "telephonenumber" name="phone number"></input> 
-      </input>
-    <input type="submit">
-</form>
-
-$_POST[] = array(
-  'firstname'=>'value',
-  'lastname'=>'value',
-  'email'=>'value',
-  'address'=>'value',
   
 // Create versions of `fs` methods we'll be using to return promises
 let readFile = util.promisify(fs.readFile);
@@ -30,8 +15,9 @@ let dbPath = path.resolve('src/db.json');
  *
  */
 async function read() {
-  let json = await readFile(dbPath);
-  return JSON.parse(json);
+  let fileContents = await readFile(dbPath);
+  return allUsers=JSON.parse(fileContents);
+  return allUsers;
 }
 
 /**
@@ -46,13 +32,13 @@ async function write(dbItems) {
 /**
  *
  */
-async function addItem(item) {
-  const dbItems = await read();
-  dbItems.push(item);
-  await write(dbItems);
+async function addUser(newUser) {
+  let allUsers = await read();
+  allUsers.push(newUser);
+  await write(allUsers);
 }
 
 module.exports = {
   read: read,
-  addItem: addItem,
+  addUser: addUser,
 };
