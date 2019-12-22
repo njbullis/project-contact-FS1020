@@ -1,7 +1,7 @@
 'use strict';
 
-const express = require('express');
-const router = require('./router');
+let express = require('express');
+let router = require('./router');
  
 // Create an instance of an Express server app
 const app = express();
@@ -13,7 +13,7 @@ const app = express();
 //app.use('/static', express.static('static'));
 
 // Parses form submissions from a web browser
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
 
 // Parse incoming JSON
 app.use(express.json());

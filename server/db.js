@@ -14,28 +14,27 @@ let dbPath = path.resolve('server/db.json');
  * 
  */
 async function read() {
-  let fileContents = await readFile(dbPath);
-  let allEntries = JSON.parse(fileContents)
-  return allEntries;
+  let json = await readFile(dbPath);
+  return JSON.parse(json);
 }
 /**
  * 
  */
-async function write(dbEntries) {
+async function write(dbItems) {
   // The parameters for `null` and `2` are so it's formatted with 2 spaces of indentation
-  let json = JSON.stringify(dbEntries, null, 2);
+  let json = JSON.stringify(dbItems, null, 2);
   await writeFile(dbPath, json);
 }
 /**
  *
  */
-async function addEntry(Entry) {
-  let dbEntries = await read();
-  dbItems.push(entry);
-  await write(dbEntries);
+async function addItem(item) {
+  const dbItems = await read();
+  dbItems.push(item);
+  await write(dbItems);
 }
 
 module.exports = {
   read: read,
-  addUser: addUser,
+  addItem: addItem,
 };
