@@ -1,8 +1,8 @@
 'use strict';
 
-const express = require('express');
+let express = require('express');
 
-const router = express.Router();
+let router = express.Router();
 console.log('asdf');
 
 router.post('/submissions', function (request, response, next) {
@@ -15,6 +15,10 @@ router.get('/entries', function (request, response, next) {
   next();
 });
 
+router.post('/item', async function read() {
+  let json = await ReadFile(dbPath);
+  return JSON.parse(json);
+});
 // router.post('/user', function (request, response, next) {
 //   response.send('Register User');
 //   next();
