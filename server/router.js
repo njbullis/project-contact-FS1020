@@ -15,9 +15,8 @@ router.get('/entries', function (request, response, next) {
   next();
 });
 
-router.post('/item', async function read() {
-  let json = await ReadFile(dbPath);
-  return JSON.parse(json);
+router.post('/item', function (req, res) {
+
 });
 // router.post('/user', function (request, response, next) {
 //   response.send('Register User');
