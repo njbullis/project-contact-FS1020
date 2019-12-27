@@ -1,23 +1,26 @@
 'use strict';
 
 let express = require('express');
+let db = require('./db');
+let path = require('path');
 
 let router = express.Router();
 console.log('asdf');
+
+//let readFile = util.promisify(fs.readFile);
+//let writeFile = util.promisify(fs.writeFile);
+let dbPath = path.resolve('db.json');
 
 router.post('/submissions', function (request, response, next) {
   response.send('Create Submission');
   next();
 });
 
-router.get('/entries', function (request, response, next) {
-  response.send('Submissions');
-  next();
+router.get('/contact', async function readDB () {
+  let allContacts = await readFile(dbPath);
+  return JSON.parse(allContacts);
 });
 
-router.post('/item', function (req, res) {
-
-});
 // router.post('/user', function (request, response, next) {
 //   response.send('Register User');
 //   next();
