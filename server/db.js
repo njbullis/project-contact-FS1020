@@ -30,7 +30,12 @@ async function write(dbContacts) {
  *
  */
 async function addContact(contact) {
-  let dbContacts = await read();
+  let dbContacts = await read();app.use(function (err,req, res, next){
+      
+console.error(err.message);
+    if(!err.statusCode) err.statusCode = 500;
+    res.status(err.statusCode).send(err.message);
+  });
   dbContacts.push(contact);
   await write(dbContacts);
 }
