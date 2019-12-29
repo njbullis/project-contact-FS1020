@@ -26,6 +26,12 @@ router.get('/contact', async function (read, response, next) {
   next();
   });
   
+  router.post('/contact', async function (request, response, next) {
+    let dbResponse = await db.read();
+    response.send(dbResponse);
+    next();
+  });
+  
 router.use(function (err, req, res, next){
   console.error(err.message);
   if(!err.statusCode) err.statusCode = 500;
