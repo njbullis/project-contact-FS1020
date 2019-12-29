@@ -6,28 +6,31 @@ let db = require('./db');
 let router = express.Router();
 console.log('asdf');
 
-let util = require('util');
-let fs = require('fs');
-let path = require('path');
+//let util = require('util');
+//let fs = require('fs');
+//let path = require('path');
 
-let readFile = util.promisify(fs.readFile);
+//let readFile = util.promisify(fs.readFile);
 //let writeFile = util.promisify(fs.writeFile);
-let dbPath = path.resolve('db.json');
+//let dbPath = path.resolve('db.json');
 
 router.post('/submissions', function (request, response, next) {
   response.send('Create Submission');
   next();
 });
 
-router.get('/contact', async function read() {
-  let allContacts = await readFile(dbPath);
-  return JSON.parse(allContacts);
-});
-
+router.get('/contact', async function (read, response, next) {
+  let dbResponse = await db.read();
+  response.send(dbResponse);
+  return dbResponse;
+  next();
+  });
+  
 router.use(function (err, req, res, next){
   console.error(err.message);
   if(!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
+  next();
 });
 
 // router.post('/user', function (request, response, next) {
